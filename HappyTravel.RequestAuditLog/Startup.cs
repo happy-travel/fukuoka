@@ -26,6 +26,7 @@ namespace HappyTravel.RequestAuditLog
             services.AddElasticSearch(Configuration, vaultClient);
             services.AddTransient<IAuditLogService, AuditLogService>();
 
+            services.AddHealthChecks();
             services.AddControllers();
         }
 
@@ -43,7 +44,11 @@ namespace HappyTravel.RequestAuditLog
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapHealthChecks("/health");
+                endpoints.MapControllers();
+            });
         }
     }
 }
