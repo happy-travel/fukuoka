@@ -17,11 +17,5 @@ namespace HappyTravel.RequestAuditLog.Infrastructure
 
             return new VaultClient.VaultClient(vaultOptions);
         }
-
-
-        public static void Login(this IVaultClient client, IConfiguration configuration)
-        {
-            client.Login(configuration[configuration["Vault:Token"]]).GetAwaiter().GetResult();
-        }
     }
 }

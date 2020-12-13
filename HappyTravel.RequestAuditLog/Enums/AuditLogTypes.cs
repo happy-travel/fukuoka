@@ -1,4 +1,4 @@
-namespace HappyTravel.RequestAuditLog
+namespace HappyTravel.RequestAuditLog.Enums
 {
     public enum AuditLogTypes
     {

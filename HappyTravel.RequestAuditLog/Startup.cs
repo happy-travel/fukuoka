@@ -21,7 +21,7 @@ namespace HappyTravel.RequestAuditLog
         public void ConfigureServices(IServiceCollection services)
         {
             using var vaultClient = VaultClientFactory.CreateVaultClient(Configuration);
-            vaultClient.Login(Configuration);
+            vaultClient.Login(Configuration[Configuration["Vault:Token"]]).GetAwaiter().GetResult();
 
             services.AddElasticSearch(Configuration, vaultClient);
             services.AddTransient<IAuditLogService, AuditLogService>();

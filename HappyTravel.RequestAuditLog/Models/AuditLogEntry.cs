@@ -1,29 +1,20 @@
 using System;
+using HappyTravel.RequestAuditLog.Enums;
 
 namespace HappyTravel.RequestAuditLog.Models
 {
-    public record AuditLogEntry
+    public record AuditLogEntry<T>
     {
-        public AuditLogEntry(LogEntryRequest request, DateTime dateTime)
+        public AuditLogEntry(T logData, AuditLogTypes auditLogType, DateTime dateTime)
         {
-            Url = request.Url;
-            RequestHeaders = request.RequestHeaders;
-            ResponseHeaders = request.ResponseHeaders;
-            RequestBody = request.RequestBody;
-            ResponseBody = request.ResponseBody;
-            StatusCode = request.StatusCode;
-            ReferenceCode = request.ReferenceCode;
             DateTime = dateTime;
+            AuditLogType = auditLogType;
+            Data = logData;
         }
 
 
-        public string? Url { get; }
-        public string? RequestHeaders { get; }
-        public string? ResponseHeaders { get; }
-        public string? RequestBody { get; }
-        public string? ResponseBody { get; }
-        public int? StatusCode { get; }
-        public string? ReferenceCode { get; }
+        public T Data { get; }
+        public AuditLogTypes AuditLogType { get; }
         public DateTime DateTime { get; }
     }
 }
