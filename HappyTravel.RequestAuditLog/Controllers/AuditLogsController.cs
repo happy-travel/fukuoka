@@ -1,3 +1,4 @@
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using HappyTravel.RequestAuditLog.Enums;
@@ -16,7 +17,13 @@ namespace HappyTravel.RequestAuditLog.Controllers
         }
 
 
+        /// <summary>
+        /// Adds http request logs to audit logs repository
+        /// </summary>
+        /// <param name="request">Log data</param>
+        /// <returns></returns>
         [HttpPost("requests")]
+        [ProducesResponseType((int) HttpStatusCode.NoContent)]
         public async Task<ActionResult> AddEntry(HttpRequestAuditLogEntry request, CancellationToken token)
         {
             await _auditLogService.AddLogEntry(AuditLogTypes.HttpRequest, request, token);
