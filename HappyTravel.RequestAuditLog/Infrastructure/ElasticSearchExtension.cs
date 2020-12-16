@@ -6,7 +6,7 @@ using Nest;
 
 namespace HappyTravel.RequestAuditLog.Infrastructure
 {
-    public static class ElasticSearchExtension
+    public static class ElasticSearchExtensions
     {
         public static void AddElasticSearch(this IServiceCollection  services, IConfiguration configuration, IVaultClient vaultClient)
         {

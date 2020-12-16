@@ -26,6 +26,7 @@ namespace HappyTravel.RequestAuditLog
             services.AddElasticSearch(Configuration, vaultClient);
             services.AddTransient<IAuditLogService, AuditLogService>();
 
+            services.ConfigureSwagger();
             services.AddHealthChecks();
             services.AddControllers();
         }
@@ -43,6 +44,13 @@ namespace HappyTravel.RequestAuditLog
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSwagger()
+                .UseSwaggerUI(options =>
+                {
+                    options.SwaggerEndpoint("/swagger/v1.0/swagger.json", "HappyTravel.com request audit log api");
+                    options.RoutePrefix = string.Empty;
+                });
 
             app.UseEndpoints(endpoints =>
             {
