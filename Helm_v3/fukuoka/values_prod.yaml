@@ -1,0 +1,60 @@
+replicaCount: 1
+
+jaeger:
+  sidecar: jaeger-production
+  collector_host: dns:///jaeger-production-collector-headless.observability:14250
+
+image:
+  repository: registry.happytravel.com/fukuoka
+  tag: latest
+  pullPolicy: Always
+imagePullSecrets: 
+  - name: travel-registry
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name:
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+
+resources:
+  limits:
+    cpu: 2
+    memory: 2048Mi
+  requests:
+    cpu: 1
+    memory: 1512Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+env:
+  ASPNETCORE_ENVIRONMENT: "Production"
+  LOGGING_LEVEL: "Debug"
+  HTDC_VAULT_ENDPOINT: "https://vault.happytravel.com/v1/"
+  HTDC_ETG_SENTRY_ENDPOINT: "https://1b27421d275a47d18ecd96ce2fcf98cc@sentry.happytravel.com/33"
+  JAEGER_AGENT_HOST: "localhost"
+  JAEGER_AGENT_PORT: "6831"
