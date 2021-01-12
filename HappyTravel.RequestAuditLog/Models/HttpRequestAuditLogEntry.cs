@@ -38,5 +38,10 @@ namespace HappyTravel.RequestAuditLog.Models
         ///     Booking reference code
         /// </summary>
         public string? ReferenceCode { get; init; }
+        
+        /// <summary>
+        ///     Error message
+        /// </summary>
+        public string? Error { get; init; }
     }
 }
